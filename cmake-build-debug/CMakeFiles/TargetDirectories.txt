@@ -1,0 +1,3 @@
+D:/UTEC/Ciclo II/POO I/Proyecto Cristian/cmake-build-debug/CMakeFiles/Proyecto_Cristian.dir
+D:/UTEC/Ciclo II/POO I/Proyecto Cristian/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/UTEC/Ciclo II/POO I/Proyecto Cristian/cmake-build-debug/CMakeFiles/rebuild_cache.dir

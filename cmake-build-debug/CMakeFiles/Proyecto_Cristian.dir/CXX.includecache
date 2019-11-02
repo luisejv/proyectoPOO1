@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/UTEC/Ciclo II/POO I/Proyecto Cristian/funciones.h
+iostream
+-
+word.h
+D:/UTEC/Ciclo II/POO I/Proyecto Cristian/word.h
+word.cpp
+D:/UTEC/Ciclo II/POO I/Proyecto Cristian/word.cpp
+
+D:/UTEC/Ciclo II/POO I/Proyecto Cristian/main.cpp
+iostream
+-
+word.h
+D:/UTEC/Ciclo II/POO I/Proyecto Cristian/word.h
+funciones.h
+D:/UTEC/Ciclo II/POO I/Proyecto Cristian/funciones.h
+
+D:/UTEC/Ciclo II/POO I/Proyecto Cristian/word.cpp
+iostream
+-
+fstream
+-
+string.h
+-
+word.h
+D:/UTEC/Ciclo II/POO I/Proyecto Cristian/word.h
+sstream
+-
+
+D:/UTEC/Ciclo II/POO I/Proyecto Cristian/word.h
+iostream
+-
+string.h
+-
+fstream
+-
+vector
+-
+
