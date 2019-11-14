@@ -22,6 +22,7 @@ private:
     vector<string> palabras;
     int size;
     bool encript;
+    bool aligned;
 public:
     //Contructor
     Word();
@@ -37,6 +38,10 @@ public:
     void setSize(int size);
 
     vector<string> getPalabras();
+
+    bool isAligned() const;
+
+    void setAligned(bool aligned);
 
     //metodos
 

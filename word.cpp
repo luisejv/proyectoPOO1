@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include <string.h>
+#include <string>
 #include "word.h"
 #include <sstream>
 
@@ -19,57 +19,51 @@ Word::Word(){
     archivo.open(nomArch,ios::in);
     if(!archivo){
         cout<<"No se puede abrir el archivo";
-        exit(1);
+        //exit(1);
     } else {
-        /*el contador es por si hay saltos de linea en el archivo,
-         * y lo que hace es pasar a la siguiente fila de la matriz
-         */
-        int cont = 0;
-        /*Creamos otro contador que nos ayude a saltar de linea
-         * cuando la linea este llena*/
-        int cont2 = 0;
-        /* Aqui tambien seteamos el tamano de cada linea
-         * */
-        cout << "Digite la longitud de cada linea del archivo: ";
-        cin >> size;
-        //redimensionamos las filas, el valor 20 es momentaneo
-        texto.resize(20);
-        //comenzamos a leer el archivo y guardarlo en la matriz
-        while(archivo >> noskipws >> caracter){
-            //checkeamos que no sea salto de linea y escribimos en la matrix
-            //caso contrario, saltamos de linea.
-            if (caracter != '\n'){
-                //cuando llegamos a la cantidad maxima de caracteres en una linea,
-                //pasamos a la siguiente linea sumando cont y reseteando cont2 a 0
-                if (cont2==size){
-                    cont++;
-                    cont2 = 0;
-                }
-                texto[cont].push_back(caracter);
-                cont2++;
-            } else
-                cont++;
-        }
-        archivo.close();
-        /* este bucle es de prueba para ver si se guardo correctamente
-        for (int i = 0; i<texto.size(); i++){
-            for (int j = 0; j<texto[i].size(); j++){
-                cout << texto[i][j];
-            }
-            cout << texto[i].size() << endl;
-        }*/
         //aqui llenaremos el vector palabras
-        archivo.open(nomArch,ios::in);
         string palabra, linea;
-        //palabras.resize(50);
+        int max = 0;
         while(getline(archivo, linea)){
             stringstream linea2(linea);
             while(linea2 >> palabra){
+                if (palabra.length() > max){
+                    max = palabra.length();
+                }
                 palabras.push_back(palabra);
             }
         }
         archivo.close();
+        //aqui empieza la lectura por caracteres
+        bool correcto = false;
+        while (!correcto){
+            cout << "Digite la longitud de cada linea del archivo" <<
+            " (debe ser al menos "<< max <<"): ";
+            cin >> size;
+            if (size >= max){
+                correcto = true;
+            }
+        }
+        //comenzamos a leer el archivo y guardarlo en la matriz
+        vector<char> line;
+        int cont = 0;
+        while(archivo >> noskipws >> caracter){
+            //checkeamos que no sea salto de linea y escribimos en la matrix
+            //caso contrario, saltamos de linea.
+            if (caracter != '\n' && cont<size){
+                 line.push_back(caracter);
+                 cont++;
+            } else{
+                texto.push_back(line);
+                line.clear();
+                cont = 0;
+            }
+        }
+        archivo.close();
+        cout << "Cargado correctamente" << endl;
     }
+    encript = false;
+    aligned = false;
 }
 
 //a partir de aqui vienen los setters y getters
@@ -101,19 +95,169 @@ const vector<vector<char>> &Word::getTexto() const {
 //a partir de aqui empieza la definicion de los metodos
 
 void Word::justificar(){
-
+    texto.clear();
+    int cantPalabras = 0;
+    bool acabar = false;
+    cout << palabras.size() << endl;
+    while (!acabar){
+        int i = 0;
+        vector<char> linea;
+        bool vacio = true;
+        while (vacio && cantPalabras<palabras.size()){
+            if (palabras[cantPalabras].size()<=(size-i) && (size-i)>=0){
+                cout << palabras[cantPalabras] << " " << palabras[cantPalabras].size() << " " << size - i << endl;
+                for(int j = 0; j<palabras[cantPalabras].size(); j++){
+                    linea.push_back(palabras[cantPalabras][j]);
+                    i++;
+                }
+                cantPalabras++;
+                linea.push_back(' ');
+                i++;
+                for (auto it: linea){
+                    cout << it;
+                }
+                cout << " " << linea.size() << " " << size-i << endl;
+            } else {
+                //para remover el último espacio en la linea
+                i--;
+                linea.pop_back();
+                vacio = false;
+                for (auto it: linea){
+                    cout << it;
+                }
+                int cantEspacios = size - i;
+                cout << " " << linea.size() << " " << cantEspacios << endl;
+                bool espaciosAsignados = false;
+                int recorre = 0;
+                while(!espaciosAsignados){
+                    while(recorre!=size && cantEspacios!=0){
+                        if (linea[recorre]==' '){
+                            //insertar espacio
+                            linea.insert(linea.begin()+recorre, ' ');
+                            cantEspacios--;
+                            recorre++;
+                        }
+                        recorre++;
+                    }
+                    if (cantEspacios == 0)
+                        espaciosAsignados = true;
+                    else
+                        recorre = 0;
+                }
+                for (auto it: linea){
+                    cout << it;
+                }
+                cout << " " << linea.size() << endl;
+                texto.push_back(linea);
+            }
+        }
+        if (cantPalabras == palabras.size())
+            acabar = true;
+    }
+    aligned = true;
 }
 
 void Word::alinearDerecha(){
-
+    texto.clear();
+    int cantPalabras = 0;
+    bool acabar = false;
+    while (!acabar){
+        int i = 0;
+        vector<char> linea;
+        bool vacio = true;
+        while (vacio && cantPalabras<palabras.size()){
+            if (palabras[cantPalabras].size()<(size-i)){
+                for(int j = 0; j<palabras[cantPalabras].size(); j++){
+                    linea.push_back(palabras[cantPalabras][j]);
+                    i++;
+                }
+                cantPalabras++;
+                linea.push_back(' ');
+                i++;
+            } else {
+                //para remover el último espacio en el arreglo
+                i--;
+                linea.pop_back();
+                vacio = false;
+                int cantEspacios = size - i;
+                for (int j=0; j<cantEspacios; j++){
+                    linea.insert(linea.begin(), ' ');
+                }
+                texto.push_back(linea);
+            }
+        }
+        if (cantPalabras == palabras.size())
+            acabar = true;
+    }
+    aligned = true;
 }
 
 void Word::alinearIzquierda(){
-
+    texto.clear();
+    int cantPalabras = 0;
+    bool acabar = false;
+    while (!acabar){
+        int i = 0;
+        vector<char> linea;
+        bool vacio = true;
+        while (vacio && cantPalabras<palabras.size()){
+            if (palabras[cantPalabras].size()<(size-i)){
+                for(int j = 0; j<palabras[cantPalabras].size(); j++){
+                    linea.push_back(palabras[cantPalabras][j]);
+                    i++;
+                }
+                cantPalabras++;
+                linea.push_back(' ');
+                i++;
+            } else {
+                //para remover el último espacio en el arreglo
+                i--;
+                linea.pop_back();
+                vacio = false;
+                texto.push_back(linea);
+            }
+        }
+        if (cantPalabras == palabras.size())
+            acabar = true;
+    }
+    aligned = true;
 }
 
 void Word::alinearCentro(){
-
+    texto.clear();
+    int cantPalabras = 0;
+    bool acabar = false;
+    while (!acabar){
+        int i = 0;
+        vector<char> linea;
+        bool vacio = true;
+        while (vacio && cantPalabras<palabras.size()){
+            if (palabras[cantPalabras].size()<(size-i)){
+                for(int j = 0; j<palabras[cantPalabras].size(); j++){
+                    linea.push_back(palabras[cantPalabras][j]);
+                    i++;
+                }
+                cantPalabras++;
+                linea.push_back(' ');
+                i++;
+            } else {
+                //para remover el último espacio en el arreglo
+                i--;
+                linea.pop_back();
+                vacio = false;
+                int cantEspacios = size - i;
+                for (int j = 0; j < cantEspacios; j++){
+                    if (j%2==0){
+                        linea.insert(linea.begin(), ' ');
+                    }
+                }
+                texto.push_back(linea);
+            }
+        }
+        if (cantPalabras == palabras.size())
+            acabar = true;
+    }
+    aligned = true;
 }
 
 void Word::findWord(string palabra){
@@ -155,10 +299,28 @@ int Word::contarPalabra(string palabra){
 }
 
 void Word::encriptar(){
-
+    for(int i=0; i<texto.size(); i++) {
+        for (int j = 0; j < texto[i].size(); j++) {
+            texto[i][j] = texto[i][j] - 65;
+        }
+    }
+    encript = true;
 }
 
 void Word::desencriptar(){
+    for(int i=0; i<texto.size(); i++) {
+        for (int j = 0; j < texto[i].size(); j++) {
+            texto[i][j] = texto[i][j] + 65;
+        }
+    }
+    encript = false;
+}
 
+bool Word::isAligned() const {
+    return aligned;
+}
+
+void Word::setAligned(bool aligned) {
+    Word::aligned = aligned;
 }
 

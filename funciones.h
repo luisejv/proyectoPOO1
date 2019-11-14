@@ -7,79 +7,81 @@
 
 using namespace std;
 
-//void matrizAMatriz(Word* file){}
-
 void savefile(Word* file){
     ofstream archivo;
     string nombreArchivo;
     cout << "Digite el nombre del archivo: " << endl;
     cin >> nombreArchivo;
+    if (!(file->isAligned()) && !(file->isEncript())){
+        file->alinearIzquierda();
+    }
     archivo.open(nombreArchivo, ios::out);
     for (int i = 0; i<file->getTexto().size(); i++){
         for (int j = 0; j<file->getTexto()[i].size(); j++){
             archivo << file->getTexto()[i][j];
+            cout << file->getTexto()[i][j];
         }
         archivo << '\n';
+        cout << '\n';
     }
     archivo.close();
 }
 
-void menuFunction(int opcion, Word*& file)
+void menuFunction(char opcion, Word*& file)
 {
     switch(opcion)
     {
-        case 1:
+        case '0':
         {
             file = new Word();
-            cout << "Cargado correctamente" << endl;
             break;
         }
-        case 2:
+        case '1':
         {
             if (file != nullptr){
                 savefile(file);
                 cout << "Guardado correctamente"<< endl;
             } else
-                cout<<"No ha abierto un archivo, por favor seleccione opcion 1." <<endl;
+                cout<<"No ha abierto un archivo, por favor seleccione opcion 0." <<endl;
             break;
         }
-        case 3:
+        case '2':
         {
             if (file != nullptr){
                 file->justificar();
                 cout << "Se justifico correctamente el texto" << endl;
             } else
-                cout<<"No ha abierto un archivo, por favor seleccione opcion 1." <<endl;
+                cout<<"No ha abierto un archivo, por favor seleccione opcion 0." <<endl;
             break;
         }
-        case 4:
+        case '3':
         {
             if (file != nullptr){
                 file->alinearIzquierda();
                 cout << "Se alineo correctamente el texto"<< endl;
             } else
-                cout<<"No ha abierto un archivo, por favor seleccione opcion 1." <<endl;
+                cout<<"No ha abierto un archivo, por favor seleccione opcion 0." <<endl;
             break;
         }
-        case 5:
+        case '4':
         {
             if (file != nullptr){
                 file->alinearDerecha();
                 cout<<"Se alineo correctamente el texto" << endl;
             } else
-                cout<<"No ha abierto un archivo, por favor seleccione opcion 1." <<endl;
+                cout<<"No ha abierto un archivo, por favor seleccione opcion 0." <<endl;
             break;
         }
-        case 6:
+        case '5':
         {
             if (file != nullptr){
                 file->alinearCentro();
                 cout << "Se alineo correctamente el texto" << endl;
             } else
-                cout<<"No ha abierto un archivo, por favor seleccione opcion 1." <<endl;
+                cout<<"No ha abierto un archivo, por favor seleccione opcion 0." <<endl;
             break;
         }
-        case 7:
+        case '6':
         {
             if (file != nullptr) {
                 string palabra;
@@ -87,10 +89,10 @@ void menuFunction(int opcion, Word*& file)
                 cin >> palabra;
                 file->findWord(palabra);
             } else
-                cout<<"No ha abierto un archivo, por favor elija opcion 1." <<endl;
+                cout<<"No ha abierto un archivo, por favor elija opcion 0." <<endl;
             break;
         }
-        case 8:
+        case '7':
         {
             if (file != nullptr){
                 string palabra, palabra2;
@@ -100,10 +102,10 @@ void menuFunction(int opcion, Word*& file)
                 cin >> palabra2;
                 file->reemplazar(palabra, palabra2);
             } else
-                cout<<"No ha abierto un archivo, por favor elija opcion 1." <<endl;
+                cout<<"No ha abierto un archivo, por favor elija opcion 0." <<endl;
             break;
         }
-        case 9:
+        case '8':
         {
             if (file != nullptr){
                 string palabra;
@@ -111,10 +113,10 @@ void menuFunction(int opcion, Word*& file)
                 cin >> palabra;
                 cout << "La cantidad de veces que aparece es: "<< file->contarPalabra(palabra) << endl;
             } else
-                cout<<"No ha abierto un archivo, por favor elija opcion 1." <<endl;
+                cout<<"No ha abierto un archivo, por favor elija opcion 0." <<endl;
             break;
         }
-        case 10:
+        case '9':
         {
             if (file != nullptr){
                 if (file->isEncript()){
@@ -125,7 +127,7 @@ void menuFunction(int opcion, Word*& file)
                     cout << "Encriptado correctamente" << endl;
                 }
             } else
-                cout<<"No ha abierto un archivo, por favor elija opcion 1." <<endl;
+                cout<<"No ha abierto un archivo, por favor elija opcion 0." <<endl;
             break;
         }
         default:
@@ -137,27 +139,27 @@ void menuFunction(int opcion, Word*& file)
 
 void menu(){
     cout<<"\nBienvenido"<<endl;
-    cout<<"1. Leer archivo"<< "  ";
-    cout<<"2. Guardar archivo" << "  ";
-    cout<<"3. Justificar texto" << endl;
-    cout<<"4. Alinear a la izquierda" << "  ";
-    cout<<"5. Alinear a la derecha" << "  ";
-    cout<<"6. Centrar el texto" << endl;
-    cout<<"7. Buscar una palabra" <<"  ";
-    cout<<"8. Reemplazar una palabra" <<"  ";
-    cout<<"9. Contar una palabra"<<"  ";
-    cout<<"10. Encriptar/Desencriptar" <<endl;
+    cout<<"0. Leer archivo"<< "  ";
+    cout<<"1. Guardar archivo" << "  ";
+    cout<<"2. Justificar texto" << endl;
+    cout<<"3. Alinear a la izquierda" << "  ";
+    cout<<"4. Alinear a la derecha" << "  ";
+    cout<<"5. Centrar el texto" << endl;
+    cout<<"6. Buscar una palabra" <<"  ";
+    cout<<"7. Reemplazar una palabra" <<"  ";
+    cout<<"8. Contar una palabra"<<"  ";
+    cout<<"9. Encriptar/Desencriptar" <<endl;
 }
 
 void pantallaPrincipal(Word* file)
 {
-    int opcion = 0;
+    char opcion;
     do{
         menu();
-        cout << "Seleccione una opcion: ";
+        cout << "Escriba el numero de una opcion (X para terminar): ";
         cin >> opcion;
         menuFunction(opcion, file);
-    }while(opcion!=0);
+    }while(opcion!='X');
 }
 
 #endif //PROYECTO_CRISTIAN_FUNCIONES_H
