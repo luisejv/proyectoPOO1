@@ -14,9 +14,10 @@
     <list default="true" id="24d2cbcb-abfa-465a-b652-aaeb868d9a63" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Proyecto_Cristian.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Proyecto_Cristian.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/prueba2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/prueba2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/prueba3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/prueba3.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/funciones.h" beforeDir="false" afterPath="$PROJECT_DIR$/funciones.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/word.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/word.h" beforeDir="false" afterPath="$PROJECT_DIR$/word.h" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +37,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../POO II/Callables" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../POO II/Hilos" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -78,7 +79,12 @@
       <workItem from="1572720237610" duration="2611000" />
       <workItem from="1572888642888" duration="1059000" />
       <workItem from="1573082654297" duration="38000" />
-      <workItem from="1573579549409" duration="30839000" />
+      <workItem from="1573579549409" duration="31445000" />
+      <workItem from="1573795018018" duration="86000" />
+      <workItem from="1573835436894" duration="1677000" />
+      <workItem from="1573930091259" duration="1155000" />
+      <workItem from="1573931604356" duration="1270000" />
+      <workItem from="1574138774810" duration="16860000" />
     </task>
     <servers />
   </component>

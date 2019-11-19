@@ -10,9 +10,9 @@ using namespace std;
 void savefile(Word* file){
     ofstream archivo;
     string nombreArchivo;
-    cout << "Digite el nombre del archivo: " << endl;
+    cout << "Digite el nombre del archivo donde desea guardar: " << endl;
     cin >> nombreArchivo;
-    if (!(file->isAligned()) && !(file->isEncript())){
+    if (!(file->isAligned())){
         file->alinearIzquierda();
     }
     archivo.open(nombreArchivo, ios::out);
@@ -40,7 +40,7 @@ void menuFunction(char opcion, Word*& file)
         {
             if (file != nullptr){
                 savefile(file);
-                cout << "Guardado correctamente"<< endl;
+                cout << "Guardado correctamente."<< endl;
             } else
                 cout<<"No ha abierto un archivo, por favor seleccione opcion 0." <<endl;
             break;
@@ -49,7 +49,7 @@ void menuFunction(char opcion, Word*& file)
         {
             if (file != nullptr){
                 file->justificar();
-                cout << "Se justifico correctamente el texto" << endl;
+                cout << "Se justifico correctamente el texto." << endl;
             } else
                 cout<<"No ha abierto un archivo, por favor seleccione opcion 0." <<endl;
             break;
@@ -58,7 +58,7 @@ void menuFunction(char opcion, Word*& file)
         {
             if (file != nullptr){
                 file->alinearIzquierda();
-                cout << "Se alineo correctamente el texto"<< endl;
+                cout << "Se alineo correctamente el texto."<< endl;
             } else
                 cout<<"No ha abierto un archivo, por favor seleccione opcion 0." <<endl;
             break;
@@ -67,7 +67,7 @@ void menuFunction(char opcion, Word*& file)
         {
             if (file != nullptr){
                 file->alinearDerecha();
-                cout<<"Se alineo correctamente el texto" << endl;
+                cout<<"Se alineo correctamente el texto." << endl;
             } else
                 cout<<"No ha abierto un archivo, por favor seleccione opcion 0." <<endl;
             break;
@@ -76,7 +76,7 @@ void menuFunction(char opcion, Word*& file)
         {
             if (file != nullptr){
                 file->alinearCentro();
-                cout << "Se alineo correctamente el texto" << endl;
+                cout << "Se alineo correctamente el texto." << endl;
             } else
                 cout<<"No ha abierto un archivo, por favor seleccione opcion 0." <<endl;
             break;
@@ -121,10 +121,10 @@ void menuFunction(char opcion, Word*& file)
             if (file != nullptr){
                 if (file->isEncript()){
                     file->desencriptar();
-                    cout << "Desencriptado correctamente" << endl;
+                    cout << "Desencriptado correctamente." << endl;
                 } else {
                     file->encriptar();
-                    cout << "Encriptado correctamente" << endl;
+                    cout << "Encriptado correctamente." << endl;
                 }
             } else
                 cout<<"No ha abierto un archivo, por favor elija opcion 0." <<endl;
