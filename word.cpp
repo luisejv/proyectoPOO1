@@ -19,7 +19,6 @@ Word::Word(){
     archivo.open(nomArch,ios::in);
     if(!archivo){
         cout<<"No se puede abrir el archivo";
-        //exit(1);
     } else {
         //aqui llenaremos el vector palabras
         string palabra, linea;
@@ -47,6 +46,7 @@ Word::Word(){
         //comenzamos a leer el archivo y guardarlo en la matriz
         vector<char> line;
         int cont = 0;
+        archivo.open(nomArch,ios::in);
         while(archivo >> noskipws >> caracter){
             //checkeamos que no sea salto de linea y escribimos en la matriz
             //caso contrario, saltamos de linea.

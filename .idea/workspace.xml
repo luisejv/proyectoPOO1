@@ -14,9 +14,6 @@
     <list default="true" id="24d2cbcb-abfa-465a-b652-aaeb868d9a63" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Proyecto_Cristian.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Proyecto_Cristian.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/prueba2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/prueba2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/prueba3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/prueba3.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/funciones.h" beforeDir="false" afterPath="$PROJECT_DIR$/funciones.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/word.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/word.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -85,6 +82,7 @@
       <workItem from="1573930091259" duration="1155000" />
       <workItem from="1573931604356" duration="1270000" />
       <workItem from="1574138774810" duration="16860000" />
+      <workItem from="1574173932925" duration="3105000" />
     </task>
     <servers />
   </component>
