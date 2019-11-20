@@ -14,7 +14,7 @@ Word::Word(){
     ifstream archivo;
     char caracter;
     string nomArch;
-    cout<<"Digite el nombre del archivo: ";
+    cout<<"Digite el nombre del archivo de donde desea leer: ";
     cin>>nomArch;
     archivo.open(nomArch,ios::in);
     if(!archivo){
@@ -111,6 +111,7 @@ void Word::justificar(){
         int i = 0;
         vector<char> linea;
         bool vacio = true;
+        int cantPalabrasPorLinea = 0;
         while (vacio){
             if (palabras[cantPalabras].size()<=(size-i) && (size-i)>=0  && cantPalabras<palabras.size()){
                 //cout << palabras[cantPalabras] << " " << palabras[cantPalabras].size() << " " << size - i << endl;
@@ -118,47 +119,50 @@ void Word::justificar(){
                     linea.push_back(palabras[cantPalabras][j]);
                     i++;
                 }
+                cantPalabrasPorLinea++;
                 cantPalabras++;
                 linea.push_back(' ');
                 i++;
                 /*for (auto it: linea){
                     cout << it;
                 }
-                cout << " " << linea.size() << " " << size-i << endl;*/
+                cout << " " << linea.size() << " " << size-i << " " << cantPalabrasPorLinea << endl;*/
             } else {
-                //para remover el último espacio en la linea
-                i--;
-                linea.pop_back();
                 vacio = false;
-                int cantEspacios = size - i;
-                /*for (auto it: linea){
-                    cout << it;
-                }
-                cout << " " << linea.size() << " " << cantEspacios << endl;*/
-                bool espaciosAsignados = false;
-                int recorre = 0;
-                while(!espaciosAsignados){
-                    while(recorre<size-cantEspacios && cantEspacios>0){
-                        if (linea[recorre]==' '){
-                            bool checkear_espacios = false;
-                            while (!checkear_espacios){
-                                if (linea[recorre+1]==' '){
-                                    recorre++;
-                                } else
-                                    checkear_espacios = true;
-                            }
-                            //insertar espacio
-                            linea.insert(linea.begin()+recorre+1, ' ');
-                            cantEspacios--;
-                            recorre++;
-                            recorre++;
-                        } else
-                            recorre++;
+                if (cantPalabrasPorLinea>1) {
+                    //para remover el último espacio en la linea
+                    i--;
+                    linea.pop_back();
+                    int cantEspacios = size - i;
+                    /*for (auto it: linea){
+                        cout << it;
                     }
-                    if (cantEspacios == 0)
-                        espaciosAsignados = true;
-                    else
-                        recorre = 0;
+                    cout << " " << linea.size() << " " << cantEspacios << endl;*/
+                    bool espaciosAsignados = false;
+                    int recorre = 0;
+                    while (!espaciosAsignados) {
+                        while (recorre < size - cantEspacios && cantEspacios > 0) {
+                            if (linea[recorre] == ' ') {
+                                bool checkear_espacios = false;
+                                while (!checkear_espacios) {
+                                    if (linea[recorre + 1] == ' ') {
+                                        recorre++;
+                                    } else
+                                        checkear_espacios = true;
+                                }
+                                //insertar espacio
+                                linea.insert(linea.begin() + recorre + 1, ' ');
+                                cantEspacios--;
+                                recorre++;
+                                recorre++;
+                            } else
+                                recorre++;
+                        }
+                        if (cantEspacios == 0)
+                            espaciosAsignados = true;
+                        else
+                            recorre = 0;
+                    }
                 }
                 /*for (auto it: linea){
                     cout << it;
